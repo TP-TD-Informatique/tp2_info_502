@@ -15,6 +15,7 @@ def process_line(line):
     line = line.replace("&", "&amp;")
     line = line.replace("<", "&lt;")
     line = line.replace(">", "&gt;")
+    line = re.sub("(?i)[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}", "EMAIL", line)
 
     return line
 
