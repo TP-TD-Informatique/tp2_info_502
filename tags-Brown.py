@@ -12,7 +12,11 @@ import re
 #########################################
 ## fonction à compléter pendant le TP...
 def process_line(line):
-    return line.upper()
+    line = line.replace("&", "&amp;")
+    line = line.replace("<", "&lt;")
+    line = line.replace(">", "&gt;")
+
+    return line
 
 
 ############################################################
