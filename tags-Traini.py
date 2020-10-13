@@ -49,10 +49,10 @@ def process_line(line):
     line = re.sub("^(=+)([^=](.*[^=])?)\1$", titre, line)
 
     # Mise en gras
-    line = re.sub("\*\*([^ ](.*[^ ])?)\*\*", gras, line)
+    line = re.sub("\*\*([^ ](.*?[^ ])?)\*\*", gras, line)
 
     # Soulignement
-    line = re.sub("__([^ ](.*[^ ])?)__", souligne, line)
+    line = re.sub("__([^ ](.*?[^ ])?)__", souligne, line)
 
     return line
 
