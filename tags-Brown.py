@@ -20,6 +20,7 @@ def process_line(line):
 
 
 def is_comment(line):
+    """ Code question 3
     i = 0
     while line[i] == ' ' or line[i] == '\t':
         i += 1
@@ -27,7 +28,9 @@ def is_comment(line):
     if len(line) > i + 3:
         return line[i] == line[i + 1] == line[i + 2] == '%'
     else:
-        return False
+        return False"""
+
+    return re.match("^[ \t]*%%%.*", line)
 
 
 ############################################################
