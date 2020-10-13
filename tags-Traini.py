@@ -28,6 +28,10 @@ def souligne(r):
     return f"<u>{r.group(1)}</u>"
 
 
+def lien_titre(r):
+    return f'<a href="{r.group(2)}">{r.group(1)}</a>'
+
+
 def process_line(line):
     line = line.replace("&", "&amp;")
     line = line.replace("<", "&lt;")
@@ -35,7 +39,7 @@ def process_line(line):
     # Remplacement des emails
     line = re.sub("(?i)[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}", "EMAIL", line)
 
-    reg_images = "\[(([^\[\]]/)*[^\[\]]+(\.jpg|\.png|\.sgv|\.bmp))\]"
+    reg_images = "\[(([^\[\] ]/)*[^\[\] ]+(\.jpg|\.png|\.sgv|\.bmp))]"
     if not re.findall(reg_images, line):  # Cette fonction trouve toutes les fois ou le regex fonctionne dans line
         # Remplacement des liens si ce n'est pas une image
         line = re.sub("(http[s]?://([a-zA-Z0-9-]+\.)+[a-z]{2,}(/[^/ ]*)*)", '<a href="\\1">\\1</a>', line)
@@ -53,6 +57,9 @@ def process_line(line):
 
     # Soulignement
     line = re.sub("__([^ ](.*?[^ ])?)__", souligne, line)
+
+    # Liens avec titre
+    line = re.sub("\[(.*) (.*)]", lien_titre, line)
 
     return line
 
