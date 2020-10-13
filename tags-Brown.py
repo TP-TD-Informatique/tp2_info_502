@@ -19,6 +19,17 @@ def process_line(line):
     return line
 
 
+def is_comment(line):
+    i = 0
+    while line[i] == ' ' or line[i] == '\t':
+        i += 1
+
+    if len(line) > i + 3:
+        return line[i] == line[i + 1] == line[i + 2] == '%'
+    else:
+        return False
+
+
 ############################################################
 ## fonction principale, appelée depuis la ligne de commandes
 def main():
@@ -28,7 +39,8 @@ def main():
         line = line.strip("\n\r")
 
         ## suppressions des lignes "commentaires"
-        ## ...
+        if is_comment(line):
+            continue
 
         # traitement de la ligne
         line = process_line(line)
