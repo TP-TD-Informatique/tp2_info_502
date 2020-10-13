@@ -15,7 +15,15 @@ def process_line(line):
     line = line.replace("&", "&amp;")
     line = line.replace("<", "&lt;")
     line = line.replace(">", "&gt;")
+    # Remplacement des emails
     line = re.sub("(?i)[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}", "EMAIL", line)
+
+    reg_images = "\[(([^\[\]]/)*[^\[\]]+(\.jpg|\.png|\.sgv|\.bmp))\]"
+    if not re.findall(reg_images, line): # Cette fonction trouve toutes les fois ou le regex fonctionne dans line
+        # Remplacement des liens si ce n'est pas une image
+        line = re.sub("(http[s]?://([a-zA-Z0-9-]+\.)+[a-z]{2,}(/[^/ ]*)*)", '<a href="\\1">\\1</a>', line)
+    # Remplacement des images
+    line = re.sub(reg_images, '<img src="\\1"/>', line)
 
     return line
 
